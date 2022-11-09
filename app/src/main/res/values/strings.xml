@@ -26,4 +26,8 @@
     <string name="original_course_name">Original Course Name</string>
     <string name="new_course_id">New Course ID</string>
     <string name="new_course_name">New Course Name</string>
+    <string name="remove_yourself_from_course">Remove Yourself From Course</string>
+    <string name="edit_your_courses">Edit Your Courses</string>
+    <string name="find_course">Find Course</string>
+    <string name="hello_instructor">Hello Instructor!</string>
 </resources>

@@ -37,7 +37,6 @@ public class WelcomeActivity extends AppCompatActivity {
         con = (Button) findViewById(R.id.con);
 
 
-
         TextView t = (TextView) findViewById(R.id.welcome);
         t.setText("Welcome " + name + "!, you are logged in as " + account_type );
         con.setOnClickListener(new View.OnClickListener() {

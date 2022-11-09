@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.enroll.R;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
     EditText username,password;
     Button login, register;
@@ -44,17 +46,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
-//                Intent i = new Intent(LoginActivity.this, WelcomeActivity.class);
-//                String account_type1 = db.checkType(user);
-//                Bundle bundle = new Bundle();
-//                bundle.putString("KEY1",user);
-
-
-
-//                i.putExtra("KEY",user);
-//                i.putExtras(bundle);
-
-//                startActivity(i);
 
                 if ((user.equals("")) || pass.equals("")) {
                     Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
@@ -73,9 +64,18 @@ public class LoginActivity extends AppCompatActivity {
 
                         Intent myIntent;
 
-                        myIntent = new Intent(getApplicationContext(), WelcomeActivity.class);
-                        myIntent.putExtra("KEY",user);
-                        startActivity(myIntent);
+                        if(Objects.equals(account_type, "Instructor")){
+                            myIntent = new Intent(getApplicationContext(), InstructorActivity.class);
+                            myIntent.putExtra("user", user);
+                            myIntent.putExtra("name", db.getName(user));
+
+                            startActivity(myIntent);
+                        } else if(Objects.equals(account_type, "Student")){
+                            myIntent = new Intent(getApplicationContext(), WelcomeActivity.class);
+                            myIntent.putExtra("KEY",user);
+                            startActivity(myIntent);
+                        }
+
 
 
                     } else {
