@@ -44,8 +44,11 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
+
+                System.out.println("user: " +user+" pass: "+pass);
 
                 if ((user.equals("")) || pass.equals("")) {
                     Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
@@ -58,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(mIntent);
                     }
                     else if (checkUser) {
-                        Toast.makeText(LoginActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
 
                         String account_type = db.checkAccountType(user);
 
@@ -69,13 +71,17 @@ public class LoginActivity extends AppCompatActivity {
                             myIntent.putExtra("user", user);
                             myIntent.putExtra("name", db.getName(user));
 
+                            Toast.makeText(LoginActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
+
                             startActivity(myIntent);
                         } else if(Objects.equals(account_type, "Student")){
                             myIntent = new Intent(getApplicationContext(), WelcomeActivity.class);
                             myIntent.putExtra("KEY",user);
+
+                            Toast.makeText(LoginActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
+
                             startActivity(myIntent);
                         }
-
 
 
                     } else {

@@ -30,4 +30,13 @@
     <string name="edit_your_courses">Edit Your Courses</string>
     <string name="find_course">Find Course</string>
     <string name="hello_instructor">Hello Instructor!</string>
+    <string name="assign_yourself_to_course">Assign Yourself To Course</string>
+    <string name="choose_course_days_and_time_slots">Choose Course Days and Time Slots</string>
+    <string name="day_1">Day 1</string>
+    <string name="day_2">Day 2</string>
+    <string name="update_course_days_times">Update Course Days/Times</string>
+    <string name="course_capacity">Course Capacity</string>
+    <string name="update_course_capacity">Update Course Capacity</string>
+    <string name="course_description">Course Description</string>
+    <string name="update_course_description">Update Course Description</string>
 </resources>
