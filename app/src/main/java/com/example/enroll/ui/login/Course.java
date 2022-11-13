@@ -1,3 +1,5 @@
+package com.example.enroll.ui.login;
+
 public class Course {
     public String courseName;
     public String courseCode;

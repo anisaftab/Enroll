@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.*;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,16 +42,27 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
         login.setOnClickListener(new View.OnClickListener() {
+
+            public boolean checkEmptyFields(String user, String password){
+                if((user.equals("")) || password.equals("")){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
             @Override
             public void onClick(View v) {
 
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
 
-                System.out.println("user: " +user+" pass: "+pass);
+                //System.out.println("user: " +user+" pass: "+pass);
 
-                if ((user.equals("")) || pass.equals("")) {
+                if (this.checkEmptyFields(user,pass)) {
                     Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 } else {
                     boolean checkUser = db.checkUsernamePassword(user, pass);

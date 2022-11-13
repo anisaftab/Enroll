@@ -95,10 +95,14 @@ public class InstructorActivity extends AppCompatActivity {
                 viewCourse();
 
                 try {
-                    res = db.findCourse(courseID, courseName);
+                        res = db.findCourse(courseID, courseName);
                 } catch (SQLException e){
-                    e.printStackTrace();
+                        e.printStackTrace();
                 }
+
+
+
+
 
                 courseList.clear();
 
