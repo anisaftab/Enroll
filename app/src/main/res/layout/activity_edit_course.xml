@@ -25,7 +25,9 @@
 
     <EditText
         android:id="@+id/original_course_id"
-        android:layout_width="379dp"
+        android:layout_width="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_height="55dp"
         android:layout_marginTop="252dp"
         android:hint="@string/original_course_id"
@@ -38,7 +40,9 @@
 
     <EditText
         android:id="@+id/original_course_name"
-        android:layout_width="379dp"
+        android:layout_width="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_height="55dp"
         android:layout_marginTop="312dp"
         android:hint="@string/original_course_name"
@@ -51,7 +55,9 @@
 
     <EditText
         android:id="@+id/new_course_id"
-        android:layout_width="379dp"
+        android:layout_width="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_height="55dp"
         android:layout_marginTop="372dp"
         android:hint="@string/new_course_id"
@@ -64,7 +70,9 @@
 
     <EditText
         android:id="@+id/new_course_name"
-        android:layout_width="379dp"
+        android:layout_width="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_height="55dp"
         android:layout_marginTop="436dp"
         android:hint="@string/new_course_name"

@@ -28,7 +28,7 @@
 
     <EditText
         android:id="@+id/username"
-        android:layout_width="379dp"
+        android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginTop="82dp"
         android:hint="@string/username"
@@ -43,7 +43,7 @@
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="379dp"
+        android:layout_width="match_parent"
         android:layout_height="55dp"
         android:hint="@string/password"
         android:imeActionLabel="@string/action_sign_in_short"

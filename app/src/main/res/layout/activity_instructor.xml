@@ -15,7 +15,6 @@
         android:id="@+id/edit_your_course"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginBottom="364dp"
         android:text="@string/edit_your_courses"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,7 +27,6 @@
         android:id="@+id/assign_instructor_to_course"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginBottom="300dp"
         android:text="@string/assign_yourself_to_course"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,7 +38,9 @@
 
     <EditText
         android:id="@+id/course_name_instructor"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_height="48dp"
         android:layout_marginTop="148dp"
         android:hint="@string/course_name"
@@ -54,7 +54,9 @@
 
     <EditText
         android:id="@+id/course_id_instructor"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_height="58dp"
         android:layout_marginTop="92dp"
         android:hint="@string/course_id"
@@ -71,7 +73,6 @@
         android:id="@+id/find_course_instructor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginBottom="432dp"
         android:text="@string/find_course"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -102,7 +103,7 @@
         <ListView
             android:id="@+id/courseListView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="68dp"
             android:layout_marginTop="20dp" />
     </LinearLayout>
 
@@ -110,7 +111,6 @@
         android:id="@+id/remove_instructor_from_course"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginTop="16dp"
         android:text="@string/remove_yourself_from_course"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -119,11 +119,5 @@
         app:layout_constraintTop_toBottomOf="@+id/assign_instructor_to_course"
         app:layout_constraintVertical_bias="0.015" />
 
-    <!--    <ListView-->
-<!--        android:id="@+id/courseListView"-->
-<!--        android:layout_width="330dp"-->
-<!--        android:layout_height="175dp"-->
-<!--        tools:layout_editor_absoluteX="29dp"-->
-<!--        tools:layout_editor_absoluteY="526dp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
