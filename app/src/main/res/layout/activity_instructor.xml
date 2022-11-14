@@ -11,44 +11,20 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".ui.login.AdminActivity">
 
-    <Button
-        android:id="@+id/edit_your_course"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="364dp"
-        android:text="@string/edit_your_courses"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/find_course_instructor"
-        app:layout_constraintVertical_bias="0.611" />
-
-    <Button
-        android:id="@+id/assign_instructor_to_course"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="300dp"
-        android:text="@string/assign_yourself_to_course"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_your_course"
-        app:layout_constraintVertical_bias="0.794" />
-
     <EditText
         android:id="@+id/course_name_instructor"
         android:layout_width="match_parent"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
         android:layout_height="48dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="164dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="16dp"
         android:hint="@string/course_name"
         android:importantForAutofill="no"
         android:inputType="text"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintHorizontal_bias="0.686"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,18 +45,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/find_course_instructor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="432dp"
-        android:text="@string/find_course"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_name_instructor"
-        app:layout_constraintVertical_bias="0.615" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -91,33 +55,60 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/find_course_instructor"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:text="@string/find_course"
+        app:layout_constraintBottom_toTopOf="@id/assign_instructor_to_course"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/remove_instructor_from_course">
+        app:layout_constraintTop_toBottomOf="@+id/course_name_instructor"
+        app:layout_constraintVertical_bias="0.082" />
 
-        <ListView
-            android:id="@+id/courseListView"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:layout_marginTop="20dp" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/assign_instructor_to_course"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="@string/assign_yourself_to_course"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/find_course_instructor" />
+
+    <Button
+        android:id="@+id/edit_your_course"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/edit_your_courses"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assign_instructor_to_course" />
 
     <Button
         android:id="@+id/remove_instructor_from_course"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/remove_yourself_from_course"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assign_instructor_to_course"
-        app:layout_constraintVertical_bias="0.015" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_your_course"
+        app:layout_constraintVertical_bias="0.175" />
+
+    <ListView
+        android:id="@+id/courseListView"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/remove_instructor_from_course" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
