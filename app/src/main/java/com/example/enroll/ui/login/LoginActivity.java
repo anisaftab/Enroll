@@ -9,11 +9,14 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.*;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.enroll.R;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     EditText username,password;
@@ -39,24 +42,27 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
         login.setOnClickListener(new View.OnClickListener() {
+
+            public boolean checkEmptyFields(String user, String password){
+                if((user.equals("")) || password.equals("")){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
             @Override
             public void onClick(View v) {
+
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
-//                Intent i = new Intent(LoginActivity.this, WelcomeActivity.class);
-//                String account_type1 = db.checkType(user);
-//                Bundle bundle = new Bundle();
-//                bundle.putString("KEY1",user);
 
+                //System.out.println("user: " +user+" pass: "+pass);
 
-
-//                i.putExtra("KEY",user);
-//                i.putExtras(bundle);
-
-//                startActivity(i);
-
-                if ((user.equals("")) || pass.equals("")) {
+                if (this.checkEmptyFields(user,pass)) {
                     Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 } else {
                     boolean checkUser = db.checkUsernamePassword(user, pass);
@@ -67,15 +73,27 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(mIntent);
                     }
                     else if (checkUser) {
-                        Toast.makeText(LoginActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
 
                         String account_type = db.checkAccountType(user);
 
                         Intent myIntent;
 
-                        myIntent = new Intent(getApplicationContext(), WelcomeActivity.class);
-                        myIntent.putExtra("KEY",user);
-                        startActivity(myIntent);
+                        if(Objects.equals(account_type, "Instructor")){
+                            myIntent = new Intent(getApplicationContext(), InstructorActivity.class);
+                            myIntent.putExtra("user", user);
+                            myIntent.putExtra("name", db.getName(user));
+
+                            Toast.makeText(LoginActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
+
+                            startActivity(myIntent);
+                        } else if(Objects.equals(account_type, "Student")){
+                            myIntent = new Intent(getApplicationContext(), WelcomeActivity.class);
+                            myIntent.putExtra("KEY",user);
+
+                            Toast.makeText(LoginActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
+
+                            startActivity(myIntent);
+                        }
 
 
                     } else {
