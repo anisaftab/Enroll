@@ -57,6 +57,8 @@ public class InstructorActivity extends AppCompatActivity {
         String finalUser = user;
         String finalName = name;
 
+        viewCourse();
+
         editCourse.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent myIntent = new Intent(getApplicationContext(), InstructorEditCourseActivity.class);
@@ -92,7 +94,7 @@ public class InstructorActivity extends AppCompatActivity {
 
                 Cursor res = null;
 
-                viewCourse();
+
 
                 try {
                         res = db.findCourse(courseID, courseName);

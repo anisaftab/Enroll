@@ -62,7 +62,7 @@
         android:text="@string/find_course"
         app:layout_constraintBottom_toTopOf="@id/assign_instructor_to_course"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.442"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/course_name_instructor"
         app:layout_constraintVertical_bias="0.082" />
@@ -71,7 +71,7 @@
         android:id="@+id/assign_instructor_to_course"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="20dp"
         android:text="@string/assign_yourself_to_course"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -82,7 +82,7 @@
         android:id="@+id/edit_your_course"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="12dp"
         android:text="@string/edit_your_courses"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,20 +95,21 @@
         android:text="@string/remove_yourself_from_course"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_your_course"
-        app:layout_constraintVertical_bias="0.175" />
+        app:layout_constraintVertical_bias="0.077" />
 
     <ListView
         android:id="@+id/courseListView"
-        android:layout_width="match_parent"
-        android:layout_height="68dp"
+        android:layout_width="355dp"
+        android:layout_height="180dp"
         android:layout_marginTop="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.324"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/remove_instructor_from_course" />
+        app:layout_constraintTop_toBottomOf="@+id/remove_instructor_from_course"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
