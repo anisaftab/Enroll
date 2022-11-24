@@ -87,8 +87,9 @@ public class LoginActivity extends AppCompatActivity {
 
                             startActivity(myIntent);
                         } else if(Objects.equals(account_type, "Student")){
-                            myIntent = new Intent(getApplicationContext(), WelcomeActivity.class);
-                            myIntent.putExtra("KEY",user);
+                            myIntent = new Intent(getApplicationContext(), StudentActivity.class);
+                            myIntent.putExtra("user", user);
+                            myIntent.putExtra("name", db.getName(user));
 
                             Toast.makeText(LoginActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
 

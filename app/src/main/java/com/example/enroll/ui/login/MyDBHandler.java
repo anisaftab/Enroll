@@ -141,16 +141,69 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return db.rawQuery(search, null);
     }
 
+    public Cursor findStudentCourse(String course_code, String course_name, String day){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String search = "";
+
+        if((!Objects.equals(course_code, "")) && (!Objects.equals(course_name, "")) && (!Objects.equals(day, ""))){
+            search = "SELECT * FROM " + COURSE_TABLE_NAME + " WHERE " + COLUMN_COURSE_CODE + " = \"" + course_code + "\"" + " AND "
+                    + COLUMN_COURSE_NAME + " = \"" + course_name + "\"" + " AND " + COLUMN_COURSE_DAY1 + " = \"" + day + "\"" + " OR " + COLUMN_COURSE_DAY2 + " = \"" + day + "\"";
+        } else if((!Objects.equals(course_code, "")) && (!Objects.equals(course_name, "")) && (Objects.equals(day, ""))){
+            search = "SELECT * FROM " + COURSE_TABLE_NAME + " WHERE " + COLUMN_COURSE_CODE + " = \"" + course_code + "\"" + " AND "
+                    + COLUMN_COURSE_NAME + " = \"" + course_name + "\"";
+        } else if(Objects.equals(course_code, "") && (!Objects.equals(course_name, "")) && (!Objects.equals(day, ""))){
+            search = "SELECT * FROM " + COURSE_TABLE_NAME + " WHERE " + COLUMN_COURSE_NAME + " = \"" + course_name  + "\""
+                    + " AND " + COLUMN_COURSE_DAY1 + " = \"" + day + "\"" + " OR " + COLUMN_COURSE_DAY2 + " = \"" + day + "\"";
+        } else if(Objects.equals(course_code, "") && (!Objects.equals(course_name, "")) && (Objects.equals(day, ""))){
+            search = "SELECT * FROM " + COURSE_TABLE_NAME + " WHERE " + COLUMN_COURSE_NAME + " = \"" + course_name  + "\"";
+        } else if(!Objects.equals(course_code, "") && (Objects.equals(course_name, "")) && (!Objects.equals(day, ""))){
+            search = "SELECT * FROM " + COURSE_TABLE_NAME + " WHERE " + COLUMN_COURSE_CODE + " = \"" + course_code
+                    + "\"" + " AND " + COLUMN_COURSE_DAY1 + " = \"" + day + "\"" + " OR " + COLUMN_COURSE_DAY2 + " = \"" + day + "\"";
+        } else if(!Objects.equals(course_code, "") && (Objects.equals(course_name, "")) && (Objects.equals(day, ""))){
+            search = "SELECT * FROM " + COURSE_TABLE_NAME + " WHERE " + COLUMN_COURSE_CODE + " = \"" + course_code + "\"";
+        } else if(Objects.equals(course_code, "") && (Objects.equals(course_name, "")) && (!Objects.equals(day, ""))){
+            search = "SELECT * FROM " + COURSE_TABLE_NAME + " WHERE " + COLUMN_COURSE_DAY1 + " =\"" + day + "\"" + " OR " + COLUMN_COURSE_DAY2 + " =\"" + day + "\"";
+        } else{
+            search = "SELECT * FROM " + COURSE_TABLE_NAME;
+        }
+
+        return db.rawQuery(search,null);
+    }
+
     public boolean registerStudentForCourse(String course_code, String course_name, String student_username){
 
         if(Objects.equals(course_code, "") || Objects.equals(course_name, "") || Objects.equals(student_username, "")){
             return false;
         }
 
+        if(student_username == null){
+            System.out.println("user name is null");
+            return false;
+        }
+
         SQLiteDatabase db = this.getWritableDatabase();
+
+        // Check if the course has an instructor and full information
+        Cursor cursor = db.rawQuery("SELECT * FROM " + COURSE_TABLE_NAME + " WHERE " + COLUMN_COURSE_CODE + "=?", new String[]{course_code});
+
+        cursor.moveToFirst();
+
+        System.out.println("SIZE OF CHECK COURSE CURSOR IS: " + cursor.getCount());
+
+        for(int i = 0; i < 11; i++){
+            if(cursor.isNull(i)){
+                return false;
+            }
+            System.out.println(cursor.getString(i) + "    like what.");
+        }
 
         int curr_capacity = getCurrentCourseCapacity(course_code, course_name);
         int capacity = getCourseCapacity(course_code, course_name);
+
+        System.out.println("curr cap: " + curr_capacity);
+
+        System.out.println("capacity: " + capacity);
 
         // Check if there's space in the course
         if(curr_capacity == -1 || capacity == -1){
@@ -187,7 +240,36 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         long result = db.insert(course_code, null, values);
 
+        if(result != -1){
+            updateCurrentCourseCapacity(course_code, course_name);
+        }
+
         return result != -1;
+    }
+
+    public boolean unenrollStudent(String course_code, String course_name, String student_username){
+        if(Objects.equals(course_code, "") || Objects.equals(course_name, "") || Objects.equals(student_username, "")){
+            return false;
+        }
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ArrayList<CourseObj> enrolled_courses = getCoursesStudentIsEnrolledIn(student_username);
+
+        boolean studentInCourse = false;
+
+        for(int i = 0; i < enrolled_courses.size(); i++){
+            if(Objects.equals(enrolled_courses.get(i).getCourse_code(), course_code)){
+                studentInCourse = true;
+            }
+        }
+        if(studentInCourse){
+            long result = db.delete(course_code, "student=?", new String[]{student_username});
+
+            return result != -1;
+        } else{
+            return false;
+        }
     }
 
     public CourseObj getCourseObject(String course_code, String course_name){
@@ -196,6 +278,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         if(!Objects.equals(course_code, "")){
             String search = "SELECT course_day1, course_time1, course_day2, course_time2 FROM " + COURSE_TABLE_NAME + " WHERE " + COLUMN_COURSE_CODE + " = \"" + course_code + "\"";
             Cursor cursor = db.rawQuery(search, null);
+
+            cursor.moveToFirst();
 
             return new CourseObj(course_code, cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
         }
@@ -215,13 +299,16 @@ public class MyDBHandler extends SQLiteOpenHelper {
         for(int i = 0; i < numberOfCourses; i++){
             String search = "SELECT student FROM " + course_list.get(i);
             Cursor cursor = db.rawQuery(search, null);
+
+            cursor.moveToFirst();
             int cursor_size = cursor.getCount();
 
             for(int j = 0 ; j < cursor_size; j++){
-                if(cursor.getString(i) == student_username){
+                if(Objects.equals(cursor.getString(0), student_username)){
                     student_course_list.add(getCourseObject(course_list.get(i), ""));
-                    j = cursor_size;
+                    break;
                 }
+                cursor.moveToNext();
             }
         }
 
@@ -236,6 +323,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         if(!Objects.equals(course_code, "")){
             String search = "SELECT course_day1, course_time1, course_day2, course_time2 FROM " + COURSE_TABLE_NAME + " WHERE " + COLUMN_COURSE_CODE + " = \"" + course_code + "\"";
             Cursor cursor = db.rawQuery(search, null);
+
+            cursor.moveToFirst();
 
             for(int i = 0; i < 4; i++){
                 course_times[i] = cursor.getString(i);
@@ -254,8 +343,12 @@ public class MyDBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(search, null);
 
         int size = cursor.getCount();
-        for(int i = 0; i < size; i++){
-            course_list.add(cursor.getString(i));
+
+        cursor.moveToFirst();
+
+        for(int i = 0; i < cursor.getCount(); i++){
+            course_list.add(cursor.getString(0));
+            cursor.moveToNext();
         }
 
         return course_list;
@@ -274,6 +367,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(search, null);
 
+        cursor.moveToFirst();
+
         return cursor.getInt(0);
     }
 
@@ -289,6 +384,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         }
 
         Cursor cursor = db.rawQuery(search, null);
+
+        cursor.moveToFirst();
 
         return cursor.getInt(0);
     }

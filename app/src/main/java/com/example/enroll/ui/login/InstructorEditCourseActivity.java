@@ -87,7 +87,6 @@ public class InstructorEditCourseActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 chosenDay1[0] = (String) adapterView.getItemAtPosition(i);
-                System.out.println("yo this is day 1: "+chosenDay1[0]+ " and this is d2: "+chosenDay2[0]);
             }
 
             @Override
@@ -100,7 +99,6 @@ public class InstructorEditCourseActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 chosenDay2[0] = (String) adapterView.getItemAtPosition(i);
-                System.out.println("yo this is day 1: "+chosenDay1[0]+ " and this is d2: "+chosenDay2[0]);
             }
 
             @Override
@@ -113,7 +111,6 @@ public class InstructorEditCourseActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 chosenHour1[0] = (String) adapterView.getItemAtPosition(i);
-                System.out.println("yo this is day 1: "+chosenHour1[0]+ " and this is d2: "+chosenHour2[0]);
             }
 
             @Override
@@ -126,7 +123,6 @@ public class InstructorEditCourseActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 chosenHour2[0] = (String) adapterView.getItemAtPosition(i);
-                System.out.println("yo this is day 1: "+chosenHour1[0]+ " and this is d2: "+chosenHour2[0]);
             }
 
             @Override

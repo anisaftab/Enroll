@@ -94,17 +94,11 @@ public class InstructorActivity extends AppCompatActivity {
 
                 Cursor res = null;
 
-
-
                 try {
                         res = db.findCourse(courseID, courseName);
                 } catch (SQLException e){
                         e.printStackTrace();
                 }
-
-
-
-
 
                 courseList.clear();
 
