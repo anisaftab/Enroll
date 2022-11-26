@@ -59,19 +59,6 @@ public class StudentEnrolledCoursesActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, courseList);
         courseListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
-//        courseList.clear();
-//        Cursor cursor = db.getCourseData();
-//
-//        if (cursor.getCount() == 0) {
-//            Toast.makeText(StudentActivity.this, "Nothing to show", Toast.LENGTH_SHORT).show();
-//        } else {
-//            while (cursor.moveToNext()) {
-//                courseList.add(cursor.getString(0) + ": " +cursor.getString(1)+". Capacity: " + cursor.getString(10) +"/" + cursor.getString(9));
-//            }
-//        }
-//
-//        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, courseList);
-//        courseListView.setAdapter(adapter);
+        
     }
 }
