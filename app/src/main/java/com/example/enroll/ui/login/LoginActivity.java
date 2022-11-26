@@ -59,8 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
-
-                //System.out.println("user: " +user+" pass: "+pass);
+                
 
                 if (this.checkEmptyFields(user,pass)) {
                     Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();

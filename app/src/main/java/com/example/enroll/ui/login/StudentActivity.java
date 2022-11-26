@@ -10,13 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.enroll.R;
@@ -27,7 +23,7 @@ import java.util.Objects;
 
 public class StudentActivity extends AppCompatActivity {
     Spinner course_day;
-    Button find_course, enroll_course, unenroll_course;
+    Button find_course, enroll_course, unenroll_course, view_courses;
     EditText course_code, course_name;
     ListView courseListView;
     ArrayList<String> courseList;
@@ -48,6 +44,7 @@ public class StudentActivity extends AppCompatActivity {
         course_code = findViewById(R.id.course_id_student);
         course_name = findViewById(R.id.course_name_student);
         courseListView = findViewById(R.id.studentCourseListView);
+        view_courses = (Button) findViewById(R.id.view_enrolled_courses);
 
         String[] days = new String[]{"--","Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 
@@ -153,6 +150,15 @@ public class StudentActivity extends AppCompatActivity {
                 }
 
                 viewCourse();
+            }
+        });
+
+        view_courses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(getApplicationContext(), StudentEnrolledCoursesActivity.class);
+                myIntent.putExtra("user", finalUser);
+                startActivity(myIntent);
             }
         });
 
