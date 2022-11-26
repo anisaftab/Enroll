@@ -276,15 +276,15 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         if(!Objects.equals(course_code, "")){
-            String search = "SELECT course_day1, course_time1, course_day2, course_time2 FROM " + COURSE_TABLE_NAME + " WHERE " + COLUMN_COURSE_CODE + " = \"" + course_code + "\"";
+            String search = "SELECT course_name, course_instructor_name, course_day1, course_day2, course_time1, course_time2, course_description, course_capacity, course_current_capacity FROM " + COURSE_TABLE_NAME + " WHERE " + COLUMN_COURSE_CODE + " = \"" + course_code + "\"";
             Cursor cursor = db.rawQuery(search, null);
 
             cursor.moveToFirst();
 
-            return new CourseObj(course_code, cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+            return new CourseObj(course_code, cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8));
         }
 
-        return new CourseObj("null", "null", "null", "null", "null");
+        return new CourseObj("null", "null", "null", "null", "null", "null", "null", "null", "null", "null");
     }
 
     public ArrayList<CourseObj> getCoursesStudentIsEnrolledIn(String student_username){
