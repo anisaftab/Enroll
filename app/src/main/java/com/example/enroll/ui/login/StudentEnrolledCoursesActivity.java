@@ -3,9 +3,12 @@ package com.example.enroll.ui.login;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,6 +20,7 @@ public class StudentEnrolledCoursesActivity extends AppCompatActivity {
     ListView courseListView;
     ArrayList<String> courseList;
     ArrayAdapter adapter;
+    Button back_button;
 
 
     MyDBHandler db = new MyDBHandler(this);
@@ -25,20 +29,33 @@ public class StudentEnrolledCoursesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_enrolled_courses);
 
+        back_button = (Button) findViewById(R.id.back_button);
+
         courseList = new ArrayList<>();
         courseListView = findViewById(R.id.student_enrolled_courses);
 
         String user = "";
+        String name = "";
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             user = extras.getString("user");
-
+            name = extras.getString("name");
         }
-
 
         viewCourses(user);
 
+        String finalUser = user;
+        String finalName = name;
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(getApplicationContext(), StudentActivity.class);
+                myIntent.putExtra("user", finalUser);
+                myIntent.putExtra("name", finalName);
+                startActivity(myIntent);
+            }
+        });
     }
     private void viewCourses(String userName){
         courseList.clear();
@@ -59,6 +76,6 @@ public class StudentEnrolledCoursesActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, courseList);
         courseListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        
+
     }
 }

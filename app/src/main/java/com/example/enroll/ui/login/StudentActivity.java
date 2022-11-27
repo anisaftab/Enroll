@@ -153,18 +153,18 @@ public class StudentActivity extends AppCompatActivity {
             }
         });
 
+        String finalName = name;
         view_courses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getApplicationContext(), StudentEnrolledCoursesActivity.class);
                 myIntent.putExtra("user", finalUser);
+                myIntent.putExtra("name", finalName);
                 startActivity(myIntent);
             }
         });
 
     }
-
-
 
     private void viewCourse(){
         courseList.clear();

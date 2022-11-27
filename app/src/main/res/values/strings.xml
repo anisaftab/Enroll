@@ -45,4 +45,7 @@
     <string name="student_enrolled_courses">Hello Student! These are your enrolled courses</string>
     <string name="see_my_courses">View Enrolled Courses</string>
     <string name="search_by_days">Search By Days</string>
+    <string name="back">Back</string>
+    <string name="view_enrolled_students">View Enrolled Students</string>
+    <string name="hello_professor_these_are_your_students">Hello Professor! These are your students.</string>
 </resources>

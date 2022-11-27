@@ -72,8 +72,8 @@
         android:id="@+id/find_course_student"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="28dp"
         android:text="@string/find_course"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/course_day_student" />
@@ -82,24 +82,23 @@
         android:id="@+id/enroll_student"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="28dp"
         android:text="@string/enroll_in_course"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.811"
+        app:layout_constraintHorizontal_bias="0.644"
         app:layout_constraintStart_toEndOf="@+id/find_course_student"
         app:layout_constraintTop_toBottomOf="@+id/course_day_student" />
 
     <Button
         android:id="@+id/unenroll_student"
-        android:layout_width="141dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="28dp"
+        android:layout_width="173dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="208dp"
+        android:layout_marginTop="24dp"
+
         android:text="@string/unenroll_from_course"
-        app:layout_constraintBottom_toTopOf="@+id/studentCourseListView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enroll_student"
-        app:layout_constraintVertical_bias="0.494" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enroll_student" />
 
     <ListView
         android:id="@+id/studentCourseListView"
@@ -115,10 +114,10 @@
         android:id="@+id/view_enrolled_courses"
         android:layout_width="183dp"
         android:layout_height="61dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:text="@string/see_my_courses"
         app:layout_constraintEnd_toStartOf="@+id/unenroll_student"
-        app:layout_constraintHorizontal_bias="0.638"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enroll_student" />
 
