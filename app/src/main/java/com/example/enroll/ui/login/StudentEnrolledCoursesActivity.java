@@ -3,6 +3,7 @@ package com.example.enroll.ui.login;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -45,10 +46,19 @@ public class StudentEnrolledCoursesActivity extends AppCompatActivity {
 
         if (enrolledCourses.size() == 0) {
             Toast.makeText(StudentEnrolledCoursesActivity.this, "Nothing to show", Toast.LENGTH_SHORT).show();
+        } else{
+            for(int i = 0; i < enrolledCourses.size(); i++){
+                CourseObj course = enrolledCourses.get(i);
+                String message = course.getCourse_code() + ": " + course.getCourse_name() + ". Professor: " + course.getCourse_instructor_name()
+                        + ". Classes - " + course.getDay1() + ": " + course.getTime1() + " and " + course.getDay2() + ": " + course.getTime2() + ". \n" +
+                        "Capacity: " + course.getCourse_current_capacity() + "/" + course.getCourse_capacity() + ". Description: " + course.getCourse_description() + ".";
+                courseList.add(message);
+            }
         }
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, enrolledCourses);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, courseList);
         courseListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        
     }
 }
