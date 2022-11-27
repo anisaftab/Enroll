@@ -7,8 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +22,8 @@ public class RegistrationActivity<db> extends AppCompatActivity {
 
     EditText fullname,username,password;
     Button  register;
-    RadioButton student,instructor;
+    RadioButton radioButton;
+    RadioGroup radioGroup;
     MyDBHandler db = new MyDBHandler(this);
 
     @Override
@@ -33,21 +36,10 @@ public class RegistrationActivity<db> extends AppCompatActivity {
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         register = (Button) findViewById(R.id.register);
-        student = (RadioButton) findViewById(R.id.student);
-        instructor = (RadioButton) findViewById(R.id.instructor);
         final String[] account_type = {""};
 
-        student.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v){
-                account_type[0] = "Student";
-            }
-        });
+        radioGroup = findViewById(R.id.user_type);
 
-        instructor.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v){
-                account_type[0] = "Instructor";
-            }
-        });
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +48,17 @@ public class RegistrationActivity<db> extends AppCompatActivity {
                 String name = fullname.getText().toString();
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
+
+                int radioId = radioGroup.getCheckedRadioButtonId();
+
+                radioButton = findViewById(radioId);
+
+                if(radioButton.getText().equals("Student")){
+                    account_type[0] = "Student";
+                }
+                else{
+                    account_type[0] = "Instructor";
+                }
                 String accountType = (account_type[0]);
 
 
@@ -84,8 +87,14 @@ public class RegistrationActivity<db> extends AppCompatActivity {
 
             }
 
+
         });
 
+    }
+    public void onToggle(View view){
+         int radioId = radioGroup.getCheckedRadioButtonId();
+
+         radioButton = findViewById(radioId);
     }
 }
 

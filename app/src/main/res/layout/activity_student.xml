@@ -52,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@android:drawable/btn_dropdown"
+        android:contentDescription="@string/search_by_days"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

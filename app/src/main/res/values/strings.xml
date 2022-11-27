@@ -44,4 +44,5 @@
     <string name="unenroll_from_course">Unenroll from course</string>
     <string name="student_enrolled_courses">Hello Student! These are your enrolled courses</string>
     <string name="see_my_courses">View Enrolled Courses</string>
+    <string name="search_by_days">Search By Days</string>
 </resources>
