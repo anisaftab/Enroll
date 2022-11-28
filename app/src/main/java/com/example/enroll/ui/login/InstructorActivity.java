@@ -137,6 +137,8 @@ public class InstructorActivity extends AppCompatActivity {
                 } else{
                     Toast.makeText(InstructorActivity.this, "Course assignment unsuccessful.", Toast.LENGTH_SHORT).show();
                 }
+
+                viewCourse();
             }
         });
 
@@ -154,6 +156,8 @@ public class InstructorActivity extends AppCompatActivity {
                 } else{
                     Toast.makeText(InstructorActivity.this, "Course removal unsuccessful.", Toast.LENGTH_SHORT).show();
                 }
+
+                viewCourse();
             }
         });
     }
