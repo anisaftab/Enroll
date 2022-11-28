@@ -240,6 +240,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         long result = db.insert(course_code, null, values);
 
+
         if(result != -1){
             updateCurrentCourseCapacity(course_code, course_name);
         }
