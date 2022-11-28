@@ -128,14 +128,19 @@ public class InstructorActivity extends AppCompatActivity {
                 String courseID = course_id.getText().toString();
                 String courseName = course_name.getText().toString();
 
-                boolean successful = false;
-
-                successful = db.assignInstructor(courseID, courseName, finalUser, finalName);
-
-                if(successful){
-                    Toast.makeText(InstructorActivity.this, "You have been assigned to the course.", Toast.LENGTH_SHORT).show();
-                } else{
+                if(courseID.equals("") || courseName.equals("")){
                     Toast.makeText(InstructorActivity.this, "Course assignment unsuccessful.", Toast.LENGTH_SHORT).show();
+                } else{
+                    boolean successful = false;
+
+                    successful = db.assignInstructor(courseID, courseName, finalUser, finalName);
+
+                    if(successful){
+                        Toast.makeText(InstructorActivity.this, "You have been assigned to the course.", Toast.LENGTH_SHORT).show();
+                    } else{
+                        Toast.makeText(InstructorActivity.this, "Course assignment unsuccessful.", Toast.LENGTH_SHORT).show();
+                    }
+                    
                 }
 
                 viewCourse();
