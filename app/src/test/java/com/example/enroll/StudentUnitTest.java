@@ -57,6 +57,8 @@ public class StudentUnitTest {
 
 
     }
+
+    // basic enroll test
     @Test
     public void enrollInCourseTest(){
 
@@ -66,6 +68,8 @@ public class StudentUnitTest {
 
 
     }
+
+    // enroll test if course is full
     @Test
     public void courseFullTest(){
         testDB.registerStudentForCourse("ASI","Absurd Science","Student1");
@@ -74,6 +78,8 @@ public class StudentUnitTest {
         assertEquals("Student able to enroll even if the course is full",false, actual);
 
     }
+
+    //can a student unenroll?
     @Test
     public void unEnrollTest(){
         when(testDB.unenrollStudent("ASI","Absurd Science","Student1")).thenReturn(true);
@@ -83,6 +89,8 @@ public class StudentUnitTest {
         assertEquals("Student unable to unenroll from a registered course",true, actual);
 
     }
+
+    // get which courses student is in
     @Test
     public void coursesEnrolledTest(){
         CourseObj course = new CourseObj("ASI","Absurd Science","Instructor1","Tuesday","Wednesday","10:00-11:00","10:00-11:00","Absurd course","1","1");
@@ -94,6 +102,7 @@ public class StudentUnitTest {
         assertEquals("Courses student is enrolled in not working properly ",enrolledCourses,testDB.getCoursesStudentIsEnrolledIn("Student1"));
     }
 
+    // instructor can see what students are in their course
     @Test
     public void getStudentsInCourseTest(){
         ArrayList<String> students = new ArrayList<>();
