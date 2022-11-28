@@ -421,8 +421,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         if(curr_capacity == -1 || capacity == -1){
             return false;
-        } else if(curr_capacity >= capacity){
-            return false;
         } else {
             curr_capacity += value;
             ContentValues values = new ContentValues();
