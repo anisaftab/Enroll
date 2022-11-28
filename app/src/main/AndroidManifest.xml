@@ -34,6 +34,11 @@
             android:exported="true"
             android:parentActivityName=".ui.login.LoginActivity" />
         <activity
+            android:name=".ui.login.InstructorViewStudentsActivity"
+            android:exported="true"
+            android:parentActivityName=".ui.login.InstructorEditCourseActivity" />
+
+        <activity
             android:name=".ui.login.AdminActivity"
             android:exported="true"
             android:parentActivityName=".ui.login.LoginActivity"></activity>

@@ -105,7 +105,11 @@ public class StudentActivity extends AppCompatActivity {
                     Toast.makeText(StudentActivity.this, "Nothing to show", Toast.LENGTH_SHORT).show();
                 } else {
                     while(res.moveToNext()){
-                        courseList.add(res.getString(0) + ": " + res.getString(1)+". Capacity: " + res.getString(10) +"/" + res.getString(9));
+//                        courseList.add(res.getString(0) + ": " + res.getString(1)+". Capacity: " + res.getString(10) +"/" + res.getString(9));
+                        String message = res.getString(0) + ": " + res.getString(1) + ". Professor: " + res.getString(3)
+                                + ". Classes - " + res.getString(4)+ ": " + res.getString(6) + " and " + res.getString(5) + ": " + res.getString(7) + ". \n" +
+                                "Capacity: " + res.getString(10) + "/" + res.getString(9) + ". Description: " + res.getString(8) + ".";
+                        courseList.add(message);
                     }
                 }
 
@@ -153,18 +157,18 @@ public class StudentActivity extends AppCompatActivity {
             }
         });
 
+        String finalName = name;
         view_courses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getApplicationContext(), StudentEnrolledCoursesActivity.class);
                 myIntent.putExtra("user", finalUser);
+                myIntent.putExtra("name", finalName);
                 startActivity(myIntent);
             }
         });
 
     }
-
-
 
     private void viewCourse(){
         courseList.clear();
@@ -174,7 +178,13 @@ public class StudentActivity extends AppCompatActivity {
             Toast.makeText(StudentActivity.this, "Nothing to show", Toast.LENGTH_SHORT).show();
         } else {
             while (cursor.moveToNext()) {
-                courseList.add(cursor.getString(0) + ": " +cursor.getString(1)+". Capacity: " + cursor.getString(10) +"/" + cursor.getString(9));
+//                courseList.add(cursor.getString(0) + ": " +cursor.getString(1)+". Capacity: " + cursor.getString(10) +"/" + cursor.getString(9));
+                CourseObj course = db.getCourseObject(cursor.getString(0), "");
+
+                String message = course.getCourse_code() + ": " + course.getCourse_name() + ". Professor: " + course.getCourse_instructor_name()
+                        + ". Classes - " + course.getDay1() + ": " + course.getTime1() + " and " + course.getDay2() + ": " + course.getTime2() + ". \n" +
+                        "Capacity: " + course.getCourse_current_capacity() + "/" + course.getCourse_capacity() + ". Description: " + course.getCourse_description() + ".";
+                courseList.add(message);
             }
         }
 

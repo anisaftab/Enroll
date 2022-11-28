@@ -68,13 +68,15 @@ public class InstructorActivity extends AppCompatActivity {
                 String courseID = course_id.getText().toString();
                 String courseName = course_name.getText().toString();
 
-                String actualInstructor = db.getInstructorUsername(courseID, courseName);
+                if(courseID.equals("") || courseName.equals("")){
+                    Toast.makeText(InstructorActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                }
 
                 if(courseID.equals("") || courseName.equals("")){
                     Toast.makeText(InstructorActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
-                } else if(actualInstructor == null){
+                } else if(db.getInstructorUsername(courseID, courseName) == null){
                     Toast.makeText(InstructorActivity.this, "You are not the instructor.", Toast.LENGTH_SHORT).show();
-                } else if(!actualInstructor.equals(finalUser)){
+                } else if(!db.getInstructorUsername(courseID, courseName).equals(finalUser)){
                     Toast.makeText(InstructorActivity.this, "You are not the instructor.", Toast.LENGTH_SHORT).show();
                 } else{
                     myIntent.putExtra("courseID", courseID);

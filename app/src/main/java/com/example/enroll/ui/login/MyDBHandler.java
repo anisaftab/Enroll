@@ -189,8 +189,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         cursor.moveToFirst();
 
-        System.out.println("SIZE OF CHECK COURSE CURSOR IS: " + cursor.getCount());
-
         for(int i = 0; i < 11; i++){
             if(cursor.isNull(i)){
                 return false;
@@ -242,7 +240,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
 
         if(result != -1){
-            updateCurrentCourseCapacity(course_code, course_name);
+            updateCurrentCourseCapacity(course_code, course_name, 1);
         }
 
         return result != -1;
@@ -267,7 +265,13 @@ public class MyDBHandler extends SQLiteOpenHelper {
         if(studentInCourse){
             long result = db.delete(course_code, "student=?", new String[]{student_username});
 
-            return result != -1;
+            if(result != -1){
+                updateCurrentCourseCapacity(course_code, course_name, -1);
+
+                return true;
+            } else{
+                return false;
+            }
         } else{
             return false;
         }
@@ -286,6 +290,25 @@ public class MyDBHandler extends SQLiteOpenHelper {
         }
 
         return new CourseObj("null", "null", "null", "null", "null", "null", "null", "null", "null", "null");
+    }
+
+    public ArrayList<String> getStudentsInCourse(String course_code){
+        ArrayList<String> students = new ArrayList<>();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String search = "SELECT student FROM " + course_code;
+        Cursor cursor = db.rawQuery(search, null);
+
+        cursor.moveToFirst();
+        int cursor_size = cursor.getCount();
+
+        for(int i = 0; i < cursor_size; i++){
+            students.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+
+        return students;
     }
 
     public ArrayList<CourseObj> getCoursesStudentIsEnrolledIn(String student_username){
@@ -391,7 +414,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return cursor.getInt(0);
     }
 
-    public boolean updateCurrentCourseCapacity(String course_code, String course_name){
+    public boolean updateCurrentCourseCapacity(String course_code, String course_name, int value){
         SQLiteDatabase db = this.getWritableDatabase();
 
         int curr_capacity = getCurrentCourseCapacity(course_code, course_name);
@@ -399,10 +422,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         if(curr_capacity == -1 || capacity == -1){
             return false;
-        } else if(curr_capacity >= capacity){
-            return false;
         } else {
-            curr_capacity += 1;
+            curr_capacity += value;
             ContentValues values = new ContentValues();
 
             values.put(COLUMN_COURSE_CURRENT_CAPACITY, curr_capacity);

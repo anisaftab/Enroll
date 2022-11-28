@@ -7,10 +7,10 @@
     tools:context=".ui.login.StudentEnrolledCoursesActivity">
 
     <TextView
-        android:id="@+id/student_enrolled_text"
+        android:id="@+id/instructor_student_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/student_enrolled_courses"
+        android:text="@string/hello_professor_these_are_your_students"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -19,24 +19,23 @@
         app:layout_constraintVertical_bias="0.105" />
 
     <ListView
-        android:id="@+id/student_enrolled_courses"
+        android:id="@+id/students_enrolled_in_course"
         android:layout_width="344dp"
         android:layout_height="348dp"
         android:layout_marginTop="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/student_enrolled_text" />
+        app:layout_constraintTop_toBottomOf="@+id/instructor_student_text" />
 
     <Button
-        android:id="@+id/back_button"
+        android:id="@+id/back_button_instructor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="160dp"
         android:text="@string/back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/student_enrolled_courses" />
-
+        app:layout_constraintTop_toBottomOf="@+id/students_enrolled_in_course" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
