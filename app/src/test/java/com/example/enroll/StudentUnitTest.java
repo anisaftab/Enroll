@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import static org.mockito.Mockito.when;
 
+import com.example.enroll.ui.login.Course;
 import com.example.enroll.ui.login.CourseObj;
 import com.example.enroll.ui.login.Instructor;
 import com.example.enroll.ui.login.InstructorActivity;
@@ -57,7 +58,7 @@ public class StudentUnitTest {
 
     }
     @Test
-    public void enrollInCourse(){
+    public void enrollInCourseTest(){
 
         when(testDB.registerStudentForCourse("ASI","Absurd Science","Student1")).thenReturn(true);
         actual = testDB.registerStudentForCourse("ASI","Absurd Science","Student1");
@@ -66,7 +67,7 @@ public class StudentUnitTest {
 
     }
     @Test
-    public void courseFull(){
+    public void courseFullTest(){
         testDB.registerStudentForCourse("ASI","Absurd Science","Student1");
         boolean actual = testDB.registerStudentForCourse("ASI","Absurd Science","Student2");
 
@@ -74,26 +75,39 @@ public class StudentUnitTest {
 
     }
     @Test
-    public void unEnroll(){
+    public void unEnrollTest(){
         when(testDB.unenrollStudent("ASI","Absurd Science","Student1")).thenReturn(true);
         testDB.registerStudentForCourse("ASI","Absurd Science","Student1");
         boolean actual = testDB.unenrollStudent("ASI","Absurd Science","Student1");
 
         assertEquals("Student unable to unenroll from a registered course",true, actual);
 
-
     }
     @Test
-    public void coursesEnrolled(){
-        when(testDB.registerStudentForCourse("ASI","Absurd Science","Student1")).thenCallRealMethod();
-        when(testDB.getCoursesStudentIsEnrolledIn("Student1")).thenCallRealMethod();
+    public void coursesEnrolledTest(){
+        CourseObj course = new CourseObj("ASI","Absurd Science","Instructor1","Tuesday","Wednesday","10:00-11:00","10:00-11:00","Absurd course","1","1");
+        ArrayList<CourseObj> enrolledCourses = new ArrayList<CourseObj>();
+        enrolledCourses.add(course);
         testDB.registerStudentForCourse("ASI","Absurd Science","Student1");
-        ArrayList<CourseObj> enrolledCourses = testDB.getCoursesStudentIsEnrolledIn("Student1");
+        when(testDB.getCoursesStudentIsEnrolledIn("Student1")).thenReturn(enrolledCourses);
 
-        System.out.println(enrolledCourses);
-
-
+        assertEquals("Courses student is enrolled in not working properly ",enrolledCourses,testDB.getCoursesStudentIsEnrolledIn("Student1"));
     }
+
+    @Test
+    public void getStudentsInCourseTest(){
+        ArrayList<String> students = new ArrayList<>();
+        students.add("Student1");
+        students.add("Student2");
+
+        testDB.registerStudentForCourse("ASI2","Absurd Science","Student1");
+        testDB.registerStudentForCourse("ASI2","Absurd Science","Student1");
+
+        when(testDB.getStudentsInCourse("ASI2")).thenReturn(students);
+
+        assertEquals("Enrolled Students List in course not working properly",students,testDB.getStudentsInCourse("ASI2"));
+    }
+
 
 
 
