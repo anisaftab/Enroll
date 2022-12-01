@@ -68,13 +68,15 @@ public class InstructorActivity extends AppCompatActivity {
                 String courseID = course_id.getText().toString();
                 String courseName = course_name.getText().toString();
 
-                String actualInstructor = db.getInstructorUsername(courseID, courseName);
+                if(courseID.equals("") || courseName.equals("")){
+                    Toast.makeText(InstructorActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                }
 
                 if(courseID.equals("") || courseName.equals("")){
                     Toast.makeText(InstructorActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
-                } else if(actualInstructor == null){
+                } else if(db.getInstructorUsername(courseID, courseName) == null){
                     Toast.makeText(InstructorActivity.this, "You are not the instructor.", Toast.LENGTH_SHORT).show();
-                } else if(!actualInstructor.equals(finalUser)){
+                } else if(!db.getInstructorUsername(courseID, courseName).equals(finalUser)){
                     Toast.makeText(InstructorActivity.this, "You are not the instructor.", Toast.LENGTH_SHORT).show();
                 } else{
                     myIntent.putExtra("courseID", courseID);
@@ -94,17 +96,11 @@ public class InstructorActivity extends AppCompatActivity {
 
                 Cursor res = null;
 
-
-
                 try {
                         res = db.findCourse(courseID, courseName);
                 } catch (SQLException e){
                         e.printStackTrace();
                 }
-
-
-
-
 
                 courseList.clear();
 
@@ -132,15 +128,22 @@ public class InstructorActivity extends AppCompatActivity {
                 String courseID = course_id.getText().toString();
                 String courseName = course_name.getText().toString();
 
-                boolean successful = false;
-
-                successful = db.assignInstructor(courseID, courseName, finalUser, finalName);
-
-                if(successful){
-                    Toast.makeText(InstructorActivity.this, "You have been assigned to the course.", Toast.LENGTH_SHORT).show();
-                } else{
+                if(courseID.equals("") || courseName.equals("")){
                     Toast.makeText(InstructorActivity.this, "Course assignment unsuccessful.", Toast.LENGTH_SHORT).show();
+                } else{
+                    boolean successful = false;
+
+                    successful = db.assignInstructor(courseID, courseName, finalUser, finalName);
+
+                    if(successful){
+                        Toast.makeText(InstructorActivity.this, "You have been assigned to the course.", Toast.LENGTH_SHORT).show();
+                    } else{
+                        Toast.makeText(InstructorActivity.this, "Course assignment unsuccessful.", Toast.LENGTH_SHORT).show();
+                    }
+                    
                 }
+
+                viewCourse();
             }
         });
 
@@ -158,6 +161,8 @@ public class InstructorActivity extends AppCompatActivity {
                 } else{
                     Toast.makeText(InstructorActivity.this, "Course removal unsuccessful.", Toast.LENGTH_SHORT).show();
                 }
+
+                viewCourse();
             }
         });
     }

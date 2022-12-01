@@ -39,4 +39,13 @@
     <string name="update_course_capacity">Update Course Capacity</string>
     <string name="course_description">Course Description</string>
     <string name="update_course_description">Update Course Description</string>
+    <string name="hello_student">Hello Student!</string>
+    <string name="enroll_in_course">Enroll in Course</string>
+    <string name="unenroll_from_course">Unenroll from course</string>
+    <string name="student_enrolled_courses">Hello Student! These are your enrolled courses</string>
+    <string name="see_my_courses">View Enrolled Courses</string>
+    <string name="search_by_days">Search By Days</string>
+    <string name="back">Back</string>
+    <string name="view_enrolled_students">View Enrolled Students</string>
+    <string name="hello_professor_these_are_your_students">Hello Professor! These are your students.</string>
 </resources>

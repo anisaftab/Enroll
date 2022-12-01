@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class InstructorEditCourseActivity extends AppCompatActivity {
 
     Spinner day1, day2, hours1, hours2;
-    Button updateCourseDaysTime, updateCourseCapacity, updateCourseDescription;
+    Button updateCourseDaysTime, updateCourseCapacity, updateCourseDescription, viewEnrolledStudents;
     EditText courseCapacity, courseDescription;
 
     MyDBHandler db = new MyDBHandler(this);
@@ -40,6 +40,7 @@ public class InstructorEditCourseActivity extends AppCompatActivity {
         day2 = (Spinner) findViewById(R.id.course_day2);
         hours1 = (Spinner) findViewById(R.id.course_time1);
         hours2 = (Spinner) findViewById(R.id.course_time2);
+        viewEnrolledStudents = (Button) findViewById(R.id.view_enrolled_students);
         updateCourseDaysTime = (Button) findViewById(R.id.update_course_times);
         updateCourseCapacity = (Button) findViewById(R.id.update_course_capacity);
         updateCourseDescription = (Button) findViewById(R.id.update_course_description);
@@ -82,12 +83,24 @@ public class InstructorEditCourseActivity extends AppCompatActivity {
         String finalCourseID = courseID;
         String finalCourseName = courseName;
 
+        viewEnrolledStudents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(getApplicationContext(), InstructorViewStudentsActivity.class);
+                myIntent.putExtra("user", finalUser);
+                myIntent.putExtra("name", finalName);
+                myIntent.putExtra("courseID", finalCourseID);
+                myIntent.putExtra("courseName", finalCourseName);
+
+                startActivity(myIntent);
+            }
+        });
+
 
         day1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 chosenDay1[0] = (String) adapterView.getItemAtPosition(i);
-                System.out.println("yo this is day 1: "+chosenDay1[0]+ " and this is d2: "+chosenDay2[0]);
             }
 
             @Override
@@ -100,7 +113,6 @@ public class InstructorEditCourseActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 chosenDay2[0] = (String) adapterView.getItemAtPosition(i);
-                System.out.println("yo this is day 1: "+chosenDay1[0]+ " and this is d2: "+chosenDay2[0]);
             }
 
             @Override
@@ -113,7 +125,6 @@ public class InstructorEditCourseActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 chosenHour1[0] = (String) adapterView.getItemAtPosition(i);
-                System.out.println("yo this is day 1: "+chosenHour1[0]+ " and this is d2: "+chosenHour2[0]);
             }
 
             @Override
@@ -126,7 +137,6 @@ public class InstructorEditCourseActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 chosenHour2[0] = (String) adapterView.getItemAtPosition(i);
-                System.out.println("yo this is day 1: "+chosenHour1[0]+ " and this is d2: "+chosenHour2[0]);
             }
 
             @Override
